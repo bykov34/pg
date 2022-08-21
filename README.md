@@ -10,4 +10,4 @@ postgres-cxx-client has been modified:
 - code style changed to snake_style
 - added row_iterator, dateoid, timeoid, int64 conversions
 
-libpq code taken from libpq-standalone as is for ease of use
+libpq code extracted from libpq-standalone for static-linking
