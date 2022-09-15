@@ -114,7 +114,7 @@ private:
     template <typename T, typename... Ts>
     std::enable_if_t<(0 < sizeof... (Ts)), result> exec(T&& arg, Ts&& ... args) {
         auto res = exec(std::forward<T>(arg));
-        if (!res.isOk()) {
+        if (!res.ok()) {
             return res;
         }
 
