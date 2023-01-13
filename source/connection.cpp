@@ -169,4 +169,22 @@ PGconn* connection::native() const {
     return handle_.get();
 }
 
+std::vector<std::string> connection::check_notifications()
+{
+    auto conn = native();
+    auto res = PQconsumeInput(conn);
+    _POSTGRES_CXX_ASSERT(error, (res == 1), "failed to consume input: " << message());
+    
+    std::vector<std::string> result;
+    auto* notification = PQnotifies(conn);
+    while (notification != nullptr)
+    {
+        result.push_back(notification->relname);
+        PQfreemem(notification);
+        notification = PQnotifies(conn);
+    }
+    
+    return result;
+}
+
 }  // namespace pg

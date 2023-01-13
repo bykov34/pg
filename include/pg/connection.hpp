@@ -107,6 +107,8 @@ public:
     std::string escId(std::string const& in);
 
     PGconn* native() const;
+    
+    std::vector<std::string> check_notifications();
 
 private:
     explicit connection(PGconn* handle);
